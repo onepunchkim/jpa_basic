@@ -8,33 +8,28 @@ import java.util.Date;
 public class Member {
 
     @Id @GeneratedValue
-    @Column(name = "MEMBER_ID")
-    private String id;
+    private Long id;
 
     @Column(name = "USERNAME")
     private String username;
 
-    @ManyToOne
-    @JoinColumn(name = "TEAM_ID")
-    private Team team;
+    @Column(name = "TEAM_ID")
+    private Long teamId;
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
-    public Team getTeam() {
-        return team;
-    }
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
-
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getTeamId() {
+        return teamId;
+    }
+
+    public void setTeamId(Long teamId) {
+        this.teamId = teamId;
     }
 
     public String getUsername() {
