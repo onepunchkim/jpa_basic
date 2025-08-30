@@ -27,16 +27,25 @@ public class JpaMain {
             member.setTeam(team);
             em.persist(member);
 
-            em.flush();
-            em.clear();
+/*
+            역방향(주인이 아닌 방향)만 연관관계 설정
+            양방향 연관관계 세팅 시
+            Team과 Member 둘다 값을 세팅해 줘야 한다.
+            Team에 값을 세팅하지 않으면 1차 캐시에 값을 읽지 못할 경우에 값이 전달되지 x
+ */
+            team.getMembers().add(member);
 
-            Member findMember = em.find(Member.class, member.getId());
+            //em.flush();
+            //em.clear();
 
-            List<Member> members = findMember.getTeam().getMembers();
+            Team findTeam = em.find(Team.class, team.getId()); //1차 캐시
+            List<Member> members = findTeam.getMembers();
 
+            System.out.println("===========================");
             for (Member m : members) {
-                System.out.println("m = " + m.getUsername());
+                System.out.println("m.getUsername() = " + m.getUsername());
             }
+            System.out.println("===========================");
 
             tx.commit();
         } catch (Exception e) {
