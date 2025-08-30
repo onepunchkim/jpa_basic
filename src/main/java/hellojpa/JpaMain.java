@@ -21,7 +21,7 @@ public class JpaMain {
 
             //회원저장
             Member member = new Member();
-            member.setName("member1");
+            member.setUsername("member1");
             member.setTeam(team);
             em.persist(member);
 
