@@ -35,8 +35,6 @@ public class JpaMain {
 
             *양방향 연관관계 세팅시 양쪽에 다 값을 세팅한다.*
  */
-            team.getMembers().add(member);
-
             //em.flush();
             //em.clear();
 
