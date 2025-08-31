@@ -16,6 +16,10 @@ public class Member {
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 
+    public void setTeam(Team team) {
+        this.team = team;
+    }
+
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
@@ -38,12 +42,6 @@ public class Member {
 
     public Team getTeam() {
         return team;
-    }
-
-    public void changeTeam(Team team) {
-        this.team = team;
-
-        team.getMembers().add(this); //편의 메서드를 생성해서 값을 넣는걸 빼놓지 않도록 설정
     }
 
 }

@@ -24,8 +24,9 @@ public class JpaMain {
             //회원저장
             Member member = new Member();
             member.setUsername("member1");
-            member.changeTeam(team);
             em.persist(member);
+
+            team.addMember(member); //값 세팅
 
 /*
             역방향(주인이 아닌 방향)만 연관관계 설정
