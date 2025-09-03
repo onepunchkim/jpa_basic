@@ -16,17 +16,20 @@ public class JpaMain {
         tx.begin();
 
         try {
-            //팀 저장
-            Team team = new Team();
-            team.setName("TeamA");
-            em.persist(team);
 
             //회원저장
             Member member = new Member();
             member.setUsername("member1");
             em.persist(member);
 
-            team.addMember(member); //값 세팅
+            //팀 저장
+            Team team = new Team();
+            team.setName("TeamA");
+            team.getMembers().add(member); //team 값을 변경하기 위해 member 에서 update를 해야한다. (1:N) [N:1]과 다름
+            em.persist(team);
+
+
+            //team.addMember(member); //값 세팅
 
 /*
             역방향(주인이 아닌 방향)만 연관관계 설정
@@ -39,14 +42,14 @@ public class JpaMain {
             //em.flush();
             //em.clear();
 
-            Team findTeam = em.find(Team.class, team.getId()); //1차 캐시
-            List<Member> members = findTeam.getMembers();
-
-            System.out.println("===========================");
-            for (Member m : members) {
-                System.out.println("m.getUsername() = " + m.getUsername());
-            }
-            System.out.println("===========================");
+//            Team findTeam = em.find(Team.class, team.getId()); //1차 캐시
+//            List<Member> members = findTeam.getMembers();
+//
+//            System.out.println("===========================");
+//            for (Member m : members) {
+//                System.out.println("m.getUsername() = " + m.getUsername());
+//            }
+//            System.out.println("===========================");
 
             tx.commit();
         } catch (Exception e) {

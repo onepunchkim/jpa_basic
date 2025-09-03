@@ -13,7 +13,8 @@ public class Team {
     private Long id;
     private String name;
 
-    @OneToMany(mappedBy = "team")
+    @OneToMany
+    @JoinColumn(name = "TEAM_ID") // 1:N 관계 일때 필수 그렇지 않으면 중간 테이블이 생성됨
     private List<Member> members = new ArrayList<>();
 
     public List<Member> getMembers() {
