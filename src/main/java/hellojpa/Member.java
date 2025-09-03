@@ -17,6 +17,10 @@ public class Member {
     @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false) //읽기전용으로 매핑됨
     private Team team;
 
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
+
 //    @Column(name = "TEAM_ID")
 //    private Long teamId;
 
