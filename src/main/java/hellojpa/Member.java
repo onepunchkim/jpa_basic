@@ -26,16 +26,10 @@ public class Member {
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
 
-//    @Column(name = "TEAM_ID")
-//    private Long teamId;
-
     public void setTeam(Team team) {
         this.team = team;
     }
 
-//    @ManyToOne
-//    @JoinColumn(name = "TEAM_ID")
-//    private Team team;
 
     public Long getId() {
         return id;
