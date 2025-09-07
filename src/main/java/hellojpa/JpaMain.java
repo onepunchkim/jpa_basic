@@ -2,6 +2,7 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class JpaMain {
@@ -17,30 +18,19 @@ public class JpaMain {
 
         try {
 
-            Movie movie = new Movie();
-            movie.setDirector("aaa");
-            movie.setActor("bbb");
-            movie.setName("바람");
-            movie.setPrice(10000);
-
-            em.persist(movie);
-
-            em.flush();
-            em.clear();
-
-            Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie);
-
-/*            //회원저장
             Member member = new Member();
-            member.setUsername("member1");
+            member.setUsername("user1");
+            member.setCreatedBy("kim");
+            member.setCreatedDate(LocalDateTime.now());
+
             em.persist(member);
 
-            //팀 저장
+/*            //팀 저장
             Team team = new Team();
             team.setName("TeamA");
             team.getMembers().add(member); //team 값을 변경하기 위해 member 에서 update를 해야한다. (1:N) [N:1]과 다름
-            em.persist(team);*/
+            em.persist(team);
+*/
 
 
             //team.addMember(member); //값 세팅
