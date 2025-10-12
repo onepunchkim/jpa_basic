@@ -19,11 +19,20 @@ public class JpaMain {
         try {
 
             Member member = new Member();
-            member.setUsername("user1");
-            member.setCreatedBy("kim");
-            member.setCreatedDate(LocalDateTime.now());
+            member.setUsername("hello");
 
             em.persist(member);
+
+            em.flush();
+            em.clear();
+
+
+            //Member findMember = em.find(Mmber.class, member.getId());
+
+            Member findMember = em.getReference(Member.class, member.getId());
+            System.out.println("findMember.class = " + findMember.getClass());
+            System.out.println("findMember.id = " + findMember.getId());
+            System.out.println("findMember.username = " + findMember.getUsername());
 
 /*            //팀 저장
             Team team = new Team();
@@ -64,4 +73,5 @@ public class JpaMain {
 
         emf.close();
     }
+
 }
