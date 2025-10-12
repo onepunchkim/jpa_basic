@@ -13,10 +13,11 @@ public class Member extends BaseEntity {
     private Long id;
 
     @Column(name = "USERNAME")
-    private String username;
+    private String name;
 
-    @ManyToOne //ManyToOne 은 mappedBy 제공x (주로 연관관계의 주인이기 때문)
-    @JoinColumn(name = "TEAM_ID", insertable = false, updatable = false) //읽기전용으로 매핑됨
+    @ManyToOne(fetch = FetchType.EAGER)
+    //ManyToOne 은 mappedBy 제공x (주로 연관관계의 주인이기 때문)
+    @JoinColumn(name = "TEAM_ID") //읽기전용으로 매핑됨, (insertable = false, updatable = false)
     private Team team;
 
     @OneToOne
@@ -25,7 +26,6 @@ public class Member extends BaseEntity {
 
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
-
 
 
     public void setTeam(Team team) {
@@ -41,11 +41,11 @@ public class Member extends BaseEntity {
     }
 
     public String getUsername() {
-        return username;
+        return name;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.name = name;
     }
 
     public Team getTeam() {
