@@ -33,6 +33,7 @@ public class JpaMain {
             List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
             //SQL: select * from Member
             //SQL: select * from Team where TEAM_ID = xxx
+            //LAZY로 설정한 후 fetch join을 사용한다.
 
             //Member m = em.find(Member.class, member1.getId());
 
