@@ -30,13 +30,18 @@ public class JpaMain {
             em.flush();
             em.clear();
 
-            Member m = em.find(Member.class, member1.getId());
+            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+            //SQL: select * from Member
+            //SQL: select * from Team where TEAM_ID = xxx
 
-            System.out.println("m = " + m.getTeam().getClass());
+            //Member m = em.find(Member.class, member1.getId());
+
+/*            System.out.println("m = " + m.getTeam().getClass());
 
             System.out.println("===========");
             m.getTeam().getName(); //초기화
             System.out.println("===========");
+*/
 
 /*            //팀 저장
             Team team = new Team();
