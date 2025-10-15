@@ -17,8 +17,17 @@ public class JpaMain {
         tx.begin();
 
         try {
+            Child child1 = new Child();
+            Child child2 = new Child();
 
-            Team team = new Team();
+            Parent parent = new Parent();
+            parent.addChild(child1);
+            parent.addChild(child2);
+
+            em.persist(parent);
+
+
+/*            Team team = new Team();
             team.setName("teamA");
             em.persist(team);
 
@@ -31,6 +40,8 @@ public class JpaMain {
             em.clear();
 
             List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
+*/
+
             //SQL: select * from Member
             //SQL: select * from Team where TEAM_ID = xxx
             //LAZY로 설정한 후 fetch join을 사용한다.
