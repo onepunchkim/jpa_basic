@@ -41,8 +41,8 @@ public class Team extends BaseEntity {
         this.name = name;
     }
 
-    public void addMember(Member member) {
+/*    public void addMember(Member member) {
         member.setTeam(this);
         members.add(member);
-    }
+    }*/
 }

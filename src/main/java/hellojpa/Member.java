@@ -2,35 +2,40 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Member extends BaseEntity {
+public class Member {
 
     @Id @GeneratedValue
     private Long id;
 
     @Column(name = "USERNAME")
-    private String name;
+    private String username;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    // 기간 Period
+    @Embedded
+    private Period workPeriod;
+
+    // 주소
+    @Embedded
+    private Address homeAddress;
+
+    //@ManyToOne(fetch = FetchType.LAZY)
     //ManyToOne 은 mappedBy 제공x (주로 연관관계의 주인이기 때문)
-    @JoinColumn(name = "TEAM_ID") //읽기전용으로 매핑됨, (insertable = false, updatable = false)
-    private Team team;
+    //@JoinColumn(name = "TEAM_ID") //읽기전용으로 매핑됨, (insertable = false, updatable = false)
+    //private Team team;
 
-    @OneToOne
+/*    @OneToOne
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 
     @OneToMany(mappedBy = "member")
     private List<MemberProduct> memberProducts = new ArrayList<>();
-
-
-    public void setTeam(Team team) {
-        this.team = team;
-    }
+*/
 
     public Long getId() {
         return id;
@@ -40,16 +45,27 @@ public class Member extends BaseEntity {
         this.id = id;
     }
 
-    public String getUsername() {
-        return name;
+    public String getUserName() {
+        return username;
     }
 
-    public void setUsername(String username) {
-        this.name = name;
+    public void setUserName(String name) {
+        this.username = username;
     }
 
-    public Team getTeam() {
-        return team;
+    public Period getWorkPeriod() {
+        return workPeriod;
     }
 
+    public void setWorkPeriod(Period workPeriod) {
+        this.workPeriod = workPeriod;
+    }
+
+    public Address getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void setHomeAddress(Address homeAddress) {
+        this.homeAddress = homeAddress;
+    }
 }
