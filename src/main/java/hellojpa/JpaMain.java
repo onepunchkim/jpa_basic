@@ -18,13 +18,15 @@ public class JpaMain {
 
         try {
 
-            Member member = new Member();
-            member.setUserName("hello");
-            member.setHomeAddress(new Address("city", "street", "1000"));
-            member.setWorkPeriod(new Period());
+            Address address = new Address("city", "street", "1000");
 
+            Member member = new Member();
+            member.setUserName("member1");
+            member.setHomeAddress(address);
             em.persist(member);
 
+            Address newAddress = new Address("NewCity", address.getStreet(), address.getZipcode());
+            member.setHomeAddress(newAddress);
 
 /*            Team team = new Team();
             team.setName("teamA");
