@@ -3,9 +3,7 @@ package hellojpa;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Entity
 public class Member {
@@ -23,6 +21,19 @@ public class Member {
     // 주소
     @Embedded
     private Address homeAddress;
+
+    @ElementCollection
+    @CollectionTable(name = "FAVORITE_FOOD", joinColumns =
+            @JoinColumn(name = "MEMBER_ID")
+    )
+    @Column(name = "FOOD_NAME")
+    private Set<String> favoriteFoods = new HashSet<>();
+
+    @ElementCollection
+    @CollectionTable(name = "ADDRESS", joinColumns =
+            @JoinColumn(name = "MEMBER_ID")
+    )
+    private List<Address> addresseHistory = new ArrayList<>();
 
     //@ManyToOne(fetch = FetchType.LAZY)
     //ManyToOne 은 mappedBy 제공x (주로 연관관계의 주인이기 때문)

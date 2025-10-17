@@ -21,7 +21,7 @@ public class JpaMain {
             Address address = new Address("city", "street", "1000");
 
             Member member = new Member();
-            member.setUserName("member1");
+            member.setUserName("member1 ");
             member.setHomeAddress(address);
             em.persist(member);
 
