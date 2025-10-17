@@ -56,14 +56,6 @@ public class Member {
         this.id = id;
     }
 
-    public String getUserName() {
-        return username;
-    }
-
-    public void setUserName(String name) {
-        this.username = username;
-    }
-
     public Period getWorkPeriod() {
         return workPeriod;
     }
@@ -78,5 +70,29 @@ public class Member {
 
     public void setHomeAddress(Address homeAddress) {
         this.homeAddress = homeAddress;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Set<String> getFavoriteFoods() {
+        return favoriteFoods;
+    }
+
+    public void setFavoriteFoods(Set<String> favoriteFoods) {
+        this.favoriteFoods = favoriteFoods;
+    }
+
+    public List<Address> getAddresseHistory() {
+        return addresseHistory;
+    }
+
+    public void setAddresseHistory(List<Address> addresseHistory) {
+        this.addresseHistory = addresseHistory;
     }
 }
