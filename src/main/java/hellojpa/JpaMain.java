@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 public class JpaMain {
 
@@ -26,48 +27,35 @@ public class JpaMain {
             member.getFavoriteFoods().add("피자");
             member.getFavoriteFoods().add("족발");
 
-            member.getAddresseHistory().add(new Address("old1", "street", "1000"));
-            member.getAddresseHistory().add(new Address("old2", "street", "1000"));
+            member.getAddressHistory().add(new AddressEntity("old1", "street", "1000")); //많이 쓰는 방법 (Entity)
+            member.getAddressHistory().add(new AddressEntity("old2", "street", "1000"));
 
             em.persist(member);
-
-/*            Team team = new Team();
-            team.setName("teamA");
-            em.persist(team);
-
-            Member member1 = new Member();
-            member1.setUsername("member1");
-            member1.setTeam(team);
-            em.persist(member1);
 
             em.flush();
             em.clear();
 
-            List<Member> members = em.createQuery("select m from Member m", Member.class).getResultList();
-*/
+            System.out.println("=========== start =============");
+            Member findMember = em.find(Member.class, member.getId());
+
+            //homeCity -> newCity
+            //findMember.getHomeAddress().setCity("newCity");
+
+            Address a = findMember.getHomeAddress();
+            findMember.setHomeAddress(new Address("newCity", a.getStreet(), a.getZipcode()));
+
+            //치킨 -> 한식 // 값 타입 컬렉션은 값 수정 대신 값을 삭제하고 새로 만든다.
+            findMember.getFavoriteFoods().remove("치킨");
+            findMember.getFavoriteFoods().add("한식");
+
+            //equnals()와 Hashcode가 작성되어 있지않으면 실행X
+//            findMember.getAddressHistory().remove(new Address("old1", "street", "1000"));
+//            findMember.getAddressHistory().add(new Address("newCity1", "street", "1000"));
+
 
             //SQL: select * from Member
             //SQL: select * from Team where TEAM_ID = xxx
             //LAZY로 설정한 후 fetch join을 사용한다.
-
-            //Member m = em.find(Member.class, member1.getId());
-
-/*            System.out.println("m = " + m.getTeam().getClass());
-
-            System.out.println("===========");
-            m.getTeam().getName(); //초기화
-            System.out.println("===========");
-*/
-
-/*            //팀 저장
-            Team team = new Team();
-            team.setName("TeamA");
-            team.getMembers().add(member); //team 값을 변경하기 위해 member 에서 update를 해야한다. (1:N) [N:1]과 다름
-            em.persist(team);
-*/
-
-
-            //team.addMember(member); //값 세팅
 
 /*
             역방향(주인이 아닌 방향)만 연관관계 설정
@@ -77,17 +65,6 @@ public class JpaMain {
 
             *양방향 연관관계 세팅시 양쪽에 다 값을 세팅한다.*
  */
-            //em.flush();
-            //em.clear();
-
-//            Team findTeam = em.find(Team.class, team.getId()); //1차 캐시
-//            List<Member> members = findTeam.getMembers();
-//
-//            System.out.println("===========================");
-//            for (Member m : members) {
-//                System.out.println("m.getUsername() = " + m.getUsername());
-//            }
-//            System.out.println("===========================");
 
             tx.commit();
         } catch (Exception e) {

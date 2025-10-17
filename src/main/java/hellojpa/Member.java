@@ -29,11 +29,15 @@ public class Member {
     @Column(name = "FOOD_NAME")
     private Set<String> favoriteFoods = new HashSet<>();
 
-    @ElementCollection
-    @CollectionTable(name = "ADDRESS", joinColumns =
-            @JoinColumn(name = "MEMBER_ID")
-    )
-    private List<Address> addresseHistory = new ArrayList<>();
+//    @ElementCollection
+//    @CollectionTable(name = "ADDRESS", joinColumns =
+//            @JoinColumn(name = "MEMBER_ID")
+//    )
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
     //@ManyToOne(fetch = FetchType.LAZY)
     //ManyToOne 은 mappedBy 제공x (주로 연관관계의 주인이기 때문)
@@ -88,11 +92,11 @@ public class Member {
         this.favoriteFoods = favoriteFoods;
     }
 
-    public List<Address> getAddresseHistory() {
-        return addresseHistory;
+    public List<AddressEntity> getAddressHistory() {
+        return addressHistory;
     }
 
-    public void setAddresseHistory(List<Address> addresseHistory) {
-        this.addresseHistory = addresseHistory;
+    public void setAddressHistory(List<AddressEntity> addressHistory) {
+        this.addressHistory = addressHistory;
     }
 }
